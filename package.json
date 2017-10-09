@@ -22,6 +22,7 @@
   "license": "Apache-2.0",
   "main": "index",
   "scripts": {
+    "test":"cd test ; node simplerun.js",
     "browserify": "browserify eyes-browser-loader.js > dist/eyes-browser.js",
     "uglify": "uglifyjs dist/eyes-browser.js > dist/eyes-browser.min.js"
   },

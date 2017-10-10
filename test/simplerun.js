@@ -21,6 +21,7 @@ eyes.setHostingApp("My browser");
 // load images from local storage
 // check applitools key
 if ('undefined' === typeof process.env.APPLITOOLS_API_KEY) {
+    console.log('Please set environment variable APPLITOOLS_API_KEY');
     process.exit(FAIL_CODE);
 }
 

@@ -2,6 +2,9 @@
 
 var fs = require('fs');
 
+var SUCCESS_CODE = 0;
+var FAIL_CODE    = -1;
+
 var Eyes = require('../index.js').Eyes;
 var ConsoleLogHandler = require('../index.js').ConsoleLogHandler;
 var Triggers = require('../index.js').Triggers;
@@ -14,7 +17,13 @@ eyes.setApiKey(process.env.APPLITOOLS_API_KEY);
 eyes.setHostOS('Mac OS X 10.10');
 eyes.setHostingApp("My browser");
 
+
 // load images from local storage
+// check applitools key
+if ('undefined' === typeof process.env.APPLITOOLS_API_KEY) {
+    process.exit(FAIL_CODE);
+}
+
 var image1 = fs.readFileSync('image1.png');
 var image2 = fs.readFileSync('image2.png');
 
@@ -44,5 +53,8 @@ firstTestPromise = firstTestPromise.then(function (results) {
     var testResultsFormatter = new TestResultsFormatter();
     testResultsFormatter.addResults(results);
     console.log("first results", results);
+    process.exit(SUCCESS_CODE);
+}, function() {
+    process.exit(FAIL_CODE)
 });
 
